@@ -1,0 +1,2480 @@
+{% load staticfiles %}
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <title>CibilChat</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> 
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" type="text/css" href="https://www.nkarbooking.com/codebase/dhtmlxcalendar.css"/>
+    <script src="https://www.nkarbooking.com/codebase/dhtmlxcalendar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+ 
+<link rel="stylesheet" href="{% static 'css/every_style.css' %}"/>
+
+<style type="text/css">
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background:none; 
+}
+
+
+.pointer-open{
+              background-size: 100%;
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+    margin-left: -2px;
+    display: inline-block;
+    font: 19px helvetica;
+    border-radius: 50%;
+    margin-top: 21px;
+    color: white;
+    cursor: pointer;
+
+}
+
+.pointer-close{ 
+    display: none;
+}         
+  
+
+</style>
+
+  </head>
+
+<body style="background-color:darkslategray;">
+
+<div class="container" id="HideTheBot" style="display:none;">
+
+      <div class="jumbotron mt-1 " style="background-color: #f0f0f0;    position: absolute;
+    height: 35rem;
+    right: 8rem;
+    max-width: 54%;
+    width:31rem;
+    bottom:52px;
+" >
+        <div>
+
+<hr class="my-2">
+
+        <div style="height: 366px;">
+            
+          <div style="height: 556px;">
+
+            <ul class="list-group chat-log js-chat-log chat-bubble" style="width:28rem;height: 411px; max-height: 600px; padding-bottom: 8px;">
+
+            </ul>
+
+            <div class="input-group input-group-lg row" >
+   
+              <input  type="text" style="border-radius: 4rem;height: 41px;border-bottom:inset;border-right:inset;border-top-style:double;margin-top:1rem;-webkit-box-shadow: inset 0px 0px 10px rgba(0,0,0,0.1);" id="ChatInput" class="form-control js-text " placeholder="Start typing..."/>
+              
+            <button type="submit" id="submit_buttton" class="btn btn-primary btn-lg disbutton" 
+            onclick="type_submitted();"  style="font-size:18px; color:blue; background: 
+              transparent; border:transparent; margin-left:-9px;"> 
+            <svg width="35px" height="35px" viewBox="0 0 44 44" version="1.1"><g id="Web-bot" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="send-disabled-copy" fill-rule="nonzero" fill="#0092dc"><path d="M8,18.5670929 L20.2335628,23.0064699 C20.2335628,23.0064699 26.2528852,17.8194317 26.7194208,18.2916721 C27.1856393,18.7639126 21.9615191,24.6770601 21.9615191,24.6770601 L26.433224,37 L37,8 L8,18.5670929 Z" id="Shape"></path></g></g></svg>
+            </button>
+              <span></span>
+
+<!-- <i class="fa fa-send" style="font-size: 31px;" ></i>
+    -->       
+              </div>
+            
+          </div>
+        </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+      <button type="submit" class="btn btn-primary btn-lg" id="Hide_Show" onclick="HideShow();CrossShow();" style="
+              position: absolute;
+              bottom: 8px;
+              right: 35px;
+              background:transparent;
+              border:transparent; 
+              float:right;"> 
+              
+              <i class='fas fa-comments' 
+              style='position: absolute;
+              bottom: 8px;
+              right: 35px;
+              font-size: 90px;
+              color:white;
+              background:transparent;
+              text-shadow:0px 1px 5rem;'>
+              </i>
+              
+            </button>
+            
+
+      <button type="submit" class="btn btn-primary btn-lg" id="Show_cross" onclick="Crosshide();" style="
+              position: absolute;
+              bottom: 8px;
+              right: 35px;
+              background:transparent;
+              border:transparent; 
+              float:right;
+              display: none;"> 
+              
+              <img src="https://assets.payjo.co/images/Group_95_nklfv5.svg"  
+              style='position: absolute;
+              bottom: 21px;
+                 right: 33px;
+                 height: 30px;
+              background:transparent'>
+              <img style='
+                  bottom: 18px;
+                  right: 25px;
+                height: 4rem;
+                opacity: 0.2;
+                z-index: -1;
+                border-bottom-right-radius: 6rem;
+                border-bottom-left-radius: 7rem;
+                border-top-right-radius: 6rem;' src="http://www.formica.com/~/media/emea/images/decors/eu/f0949.jpg">       
+</button>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.disbutton').attr('disabled',true);
+    $('#ChatInput').keyup(function(){
+        if($(this).val().length !=0)
+            $('.disbutton').attr('disabled', false);            
+        else
+            $('.disbutton').attr('disabled',true);
+    })
+});
+
+/* 
+     function Hidebutton() {
+
+    var x = document.getElementById("submit_buttton");
+    var y = document.getElementById("ChatInput");
+
+    if (y.value != ""){
+      x.disabled= false;
+    }
+} 
+ */
+
+
+     function HideShow() {
+    var x = document.getElementById("HideTheBot");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+   
+  
+  }
+
+     function CrossShow() {
+
+      var element = document.getElementById("Hide_Show");
+      var Show_cross = document.getElementById("Show_cross");
+     if (element.style.display === "none") {
+        element.style.display = "block";
+        Show_cross.style.display = "none";
+    } 
+    else {
+        element.style.display = "none";
+        Show_cross.style.display = "block";
+    }
+   
+     }
+   function Crosshide() {
+
+      var element = document.getElementById("Show_cross");
+      var Hide_Show = document.getElementById("Hide_Show");
+        element.style.display = "none";
+        Hide_Show.style.display = "block";
+    var x = document.getElementById("HideTheBot");
+        x.style.display = "none";
+   
+     }
+
+
+
+     function type_submitted(){
+        var ChatInput = document.getElementById("ChatInput");
+        submitInput(ChatInput.value);
+      }
+</script>
+
+
+
+     <script type="text/javascript" src="{% static 'js/every_script.js' %}">
+</script>
+<script type="text/javascript" src="{% static 'js/every_appointment.js' %}">
+
+</script>
+
+    <script src="{% static 'js/garages.js' %}"></script>
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/js.cookie.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script>
+      var chatterbotUrl = "{% url 'chatterbot:chatterbot' %}";
+      var csrftoken = Cookies.get('csrftoken');
+
+      function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain){
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+
+      var $chatlog = $('.js-chat-log');
+      var $input = $('.js-text');
+      var $sayButton = $('.js-say');
+
+        var inputData = {
+          'text': $input.val()
+        }
+        
+
+      function userRow(text) {
+        var str="";
+    str += "<div' class=\"chat-msg "+$row+"\">";
+    str += "          <span class=\"msg-avatar\">";
+    str += " <img src=https://sunriseprowebsites.com/backstage/app/views/client/lutfi-cloud/lutfi-file/images/avatar.png>";
+    str += "          <\/span>";
+    str += "          <div"+$row+">";
+
+
+        var $row = $('<li>',{ class:"list-group-item user-group-item",style:"border-bottom-left-radius: 3rem;border-bottom-right-radius: 4rem;border-top-left-radius: 3rem;border-top-right-radius: 0rem;margin-right: 18px;margin-left: auto;position: relative;max-width: fit-content;background-color:darkgrey;color:white;box-shadow:0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)"});
+        $row.text(text);
+        $chatlog.append(str);
+        $chatlog.append($row)
+
+
+
+
+}
+
+
+
+      function createRow(text) {
+        var str="";
+    str += "<div' class=\"chat-msg-i "+$row+"\">";
+    str += "          <span class=\"msg-avatar\">";
+    str += '<img src="https://banner2.kisspng.com/20180611/rrg/kisspng-icici-bank-state-bank-of-india-banking-in-india-ba-5b1f39b27e6008.2584101615287730425176.jpg" alt="ICICI Lombard">';
+    str += "          <\/span>";
+    str += "          <div"+$row+">";
+
+        var $row = $('<li>', { class:"list-group-item", style:"background-color:white;border-bottom-left-radius: 4rem;border-bottom-right-radius: 4rem;border-top-left-radius: 0rem;border-top-right-radius:4rem;margin-left: 1rem;position: relative;max-width: fit-content;box-shadow:0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)"});
+        
+
+
+
+        if(text == "cre")
+    {
+
+        alert("FileClaimForm a function");
+    }
+    
+
+    else
+
+{
+
+          if(text.indexOf("Recommend") !== -1 )
+{
+
+        var $row = $('<li>', {id:"recommender",class:"list-group-item", style:"background-color:white;"});
+        $row.text("Sure, please answer the following questions:");
+$chatlog.append($row);
+
+        var $row1 = $('<li>', {id:"recommender_i",class:"list-group-item", style:"background-color:white;"});
+        $row.text("");
+        
+
+        var $form = $('<div>', {id:"recommender_form"});
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"What is your annual income?" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"number",id:"income",name:"income",placeholder:"Annual Income"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+         var $input_choice = $("<div>", 
+         {class:"form-group font-weight-bold"})
+  
+         var $input_choice_i = $("<input>", 
+         {type:"checkbox",id:"checkbox_input",name:"checkbox_input"})
+
+         var $input_choice_l = $("<label>", 
+         {for:"checkbox_input", text:"Online Payments and Cashbacks"})
+
+
+$input_choice.append($input_choice_i);
+$input_choice.append($input_choice_l);
+$form.append($input_choice);
+
+
+         var $input_choice_1 = $("<div>", 
+         {class:"form-group font-weight-bold"})
+  
+         var $input_choice_1_i = $("<input>", 
+         {type:"checkbox",id:"checkbox_input1",name:"checkbox_input1"})
+
+         var $input_choice_1_l = $("<label>", 
+         {for:"checkbox_input1", text:"Air Miles"})
+
+$input_choice_1.append($input_choice_1_i);
+$input_choice_1.append($input_choice_1_l);
+$form.append($input_choice_1);
+
+
+         var $input_choice_2 = $("<div>", 
+         {class:"form-group font-weight-bold"})
+  
+         var $input_choice_2_i = $("<input>", 
+         {type:"checkbox",id:"checkbox_input2",name:"checkbox_input2"})
+
+         var $input_choice_2_l = $("<label>", 
+         {for:"checkbox_input2", text:"Dining Deals"})
+
+
+$input_choice_2.append($input_choice_2_i);
+$input_choice_2.append($input_choice_2_l);
+$form.append($input_choice_2);
+
+         var $input_choice_3 = $("<div>", 
+         {class:"form-group font-weight-bold"})
+  
+         var $input_choice_3_i = $("<input>", 
+         {type:"checkbox",id:"checkbox_input3",name:"checkbox_input3"})
+
+         var $input_choice_3_l = $("<label>", 
+         {for:"checkbox_input3", text:"Fuel Deals"})
+
+
+$input_choice_3.append($input_choice_3_i);
+$input_choice_3.append($input_choice_3_l);
+$form.append($input_choice_3);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Submit!", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+$row1.append($form);
+$chatlog.append($row1);
+
+}
+
+else
+{             
+
+          if(text == "showing_offer")
+{
+
+        var $row = $('<li>', {id:"recommender",class:"list-group-item", style:"background-color:white;"});
+        $row.text("Thank you, based on your selection, we have this offer: ");
+
+     
+        var $form = $('<div>', {id:"recommender_form",class:"font-weight-bold",style:"font-weight:500!important",text:"Need your permission to check CIBIL Score:"});   
+
+          var $input_reg  =     $("<div>", 
+         { class:"form-group row font-weight-bold", text:""})
+          
+          var $input_radio = $("<label>",{ class:"radio radio_button", value:"true", text:"Yes"})
+          var $input_radio1 = $("<input>",{ type:"radio", value:"yes", checked:"checked", name:"radio", id:"radio"})
+          var $input_radio2 = $("<span>",{class:"checkround"})
+
+
+          var $input_radio_i = $("<label>",{ class:"radio radio_button",  text:"No"})
+          var $input_radio_i1 = $("<input>",{ type:"radio",value:"no", name:"radio", id:"radio"})
+          var $input_radio_i2 = $("<span>",{  class:"checkround"})
+
+
+$input_radio.append($input_radio1)
+$input_radio.append($input_radio2)
+
+$input_radio_i.append($input_radio_i1)
+$input_radio_i.append($input_radio_i2)
+
+$input_reg.append($input_radio)
+$input_reg.append($input_radio_i)
+
+$form.append($input_reg)
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:0px;font-weight:500!important"})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"permission_button", name:"permission_button",text:"Submit!", onclick:"permission();" }
+            )
+
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+$row.append($form);
+$chatlog.append($row);
+
+
+}
+
+else
+    {
+
+
+      if(text=="Please Fill out this form for Credit Card")
+{
+
+
+
+   var $mapCase = $('<li>',          { id:"newform",class:"list-group-item input_div",style:"background-color:white;"});
+
+        $mapCase.text("For creation, Fill out this details.");
+ 
+        var $row = $('<div>',          { id:"newform"});
+ 
+
+
+          var $form = $("<form>", 
+         { action:"/index/",method:"POST" }
+            )
+
+          var $text =$("<kbd>",
+          {text:"General Detail" ,style:"font-size:92%; margin-left:17px; border-radius:5.2rem; padding:0.2rem 3.4rem;"})
+
+$form.append($text)
+
+          
+
+          var $input_reg  =     $("<div>", 
+         { class:"form-group font-weight-bold",required:"true",style:"font-weight:500!important;margin-top:1rem;", text:"GENDER"})
+          
+          var $input_radio = $("<label>",{ class:"radio", value:"true", text:"MALE"})
+          var $input_radio1 = $("<input>",{ type:"radio", value:"1", checked:"checked", name:"gender", id:"gender"})
+          var $input_radio2 = $("<span>",{class:"checkround"})
+
+
+          var $input_radio_i = $("<label>",{ class:"radio",  text:"FEMALE"})
+          var $input_radio_i1 = $("<input>",{ type:"radio",value:"2", name:"gender", id:"gender"})
+          var $input_radio_i2 = $("<span>",{  class:"checkround"})
+
+
+$input_radio.append($input_radio1)
+$input_radio.append($input_radio2)
+
+$input_radio_i.append($input_radio_i1)
+$input_radio_i.append($input_radio_i2)
+
+$input_reg.append($input_radio)
+$input_reg.append($input_radio_i)
+
+$form.append($input_reg)
+
+
+         var $input_policy = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold input_div",text:"PAN"})
+  
+          var $input_policy_i = $("<input>", 
+         { class:"form-control input_input",id:"pan_detail",required:"true", name:"pan_detail" ,placeholder:"Eg:ABCD123EF" }
+            )
+
+          
+$input_policy.append($input_policy_i)
+$form.append($input_policy)
+
+
+
+          var $input_email  =     $("<div>", 
+         { class:"col-md-6 form-group font-weight-bold input_div",text:"Email"})
+
+          var $input_email_i = $("<input>", 
+         { class:"form-control input_input", type:"email" ,id:"email",required:"true", name:"email" ,placeholder:"example@xyz.com" }
+            )
+
+
+$input_email.append($input_email_i)
+$form.append($input_email)
+
+
+
+
+          var $input_state = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold input_div",text:" First Name"})
+  
+          var $input_state_i = $("<input>", 
+         {class:"input_input form-control", id:"first_name", name:"first_name" ,required:"true",placeholder:"First Name" }
+            )
+
+$input_state.append($input_state_i)
+$form.append($input_state)
+
+
+          var $input_state = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold input_div",text:"Middle Name"})
+  
+          var $input_state_i = $("<input>", 
+         {class:"input_input form-control", id:"middle_name", name:"middle_name" ,required:"true",placeholder:"Middle Name" }
+            )
+
+$input_state.append($input_state_i)
+$form.append($input_state)
+
+
+          var $input_state = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold input_div",text:"Last Name"})
+  
+          var $input_state_i = $("<input>", 
+         {class:"input_input form-control", id:"last_name", name:"last_name" ,required:"true",placeholder:"Last Name" }
+            )
+
+$input_state.append($input_state_i)
+$form.append($input_state)
+
+          var $input_state = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold input_div",text:"Address Line 1"})
+  
+          var $input_state_i = $("<input>", 
+         {class:"input_input form-control", id:"addr1", name:"addr1" ,required:"true",placeholder:"Address Line 1" }
+            )
+
+$input_state.append($input_state_i)
+$form.append($input_state)
+
+          var $input_state = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold input_div",text:"Address Line 2"})
+  
+          var $input_state_i = $("<input>", 
+         {class:"input_input form-control", id:"addr2", name:"addr2" ,required:"true",placeholder:"Address Line 2" }
+            )
+
+$input_state.append($input_state_i)
+$form.append($input_state)
+
+
+          var $input_state = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold input_div",text:"Address Line 3"})
+  
+          var $input_state_i = $("<input>", 
+         {class:"input_input form-control", id:"addr3", name:"addr3" ,required:"true",placeholder:"Address Line 3" }
+            )
+
+$input_state.append($input_state_i)
+$form.append($input_state)
+
+
+          var $input_price  =     $("<div>", 
+         { class:"col-md-6 form-group font-weight-bold input_div",text:"PIN CODE"})
+
+          var $input_price_i = $("<input>", 
+         { class:"form-control input_input", type:"Number" ,id:"pin_code", name:"pin_code",required:"true",placeholder:"Pin Code" ,required:"true"}
+            )
+  
+
+$input_price.append($input_price_i)
+$form.append($input_price)
+
+
+          var $input_price  =     $("<div>", 
+         { class:"col-md-6 form-group font-weight-bold input_div",text:"Score"})
+
+          var $input_price_i = $("<input>", 
+         { class:"form-control input_input", type:"text" ,id:"score", name:"score",required:"true",placeholder:"Pin Code" ,required:"true"}
+            )
+  
+
+$input_price.append($input_price_i)
+$form.append($input_price)
+
+
+          var $input_number  =     $("<div>", 
+         { class:"col-md-6  form-group font-weight-bold input_div" ,style:"font-weight:500!important;",text:"Mobile Number"})
+
+          var $input_number_i = $("<input>", 
+         { class:"form-control input_input",required:"true", type:"number" , value:"", id:"number", name:"number" ,placeholder:"Mobile number"}
+            )
+
+
+$input_number.append($input_number_i)
+$form.append($input_number)
+
+
+          var $input_date  =     $("<div>", 
+         { class:"col-md-6  form-group font-weight-bold input_div" ,style:"font-weight:500!important;",text:"Date Of Birth"})
+
+          var $input_date_i = $("<input>", 
+         { class:"form-control input_input", type:"date" ,required:"true", value:"", id:"date", name:"date"}
+            )
+
+
+$input_date.append($input_date_i)
+$form.append($input_date)
+
+
+
+          var $input_veh  =     $("<div>", 
+         { class:"col-md-6 form-group font-weight-bold input_div",style:"font-weight:500!important", text:"State"})
+
+          var $input_veh_i = $("<select>", 
+         { class:"form-control input_input", type:"select" ,id:"state",required:"true", name:"state" ,placeholder:"" ,required:"true",}
+            )
+
+          var $opt2 = $("<option>", 
+         { class:"form-control", value:"Madhya Pradesh", text:"Madhya Pradesh"}
+            )
+          var $opt1 = $("<option>", 
+         { class:"form-control", value:"Maharastra", text:"Maharastra"}
+            )
+$input_veh_i.append($opt2)
+$input_veh_i.append($opt1)
+
+$input_veh.append($input_veh_i)
+$form.append($input_veh)
+
+
+
+
+          var $input_submit  =     $("<div>", 
+         { class:"col-md-8 form-group"})
+
+          var $input_submit_i = $("<button>", 
+         { class:"btn btn-primary my_button", type:'submit', text:"Submit!",onclick:"submit_detail();"}
+           )
+ 
+$input_submit.append($input_submit_i)
+$form.append($input_submit)
+
+
+        $row.append($form);
+        $mapCase.append($row);
+        $chatlog.append($mapCase);
+
+}
+    else{
+
+                if(text.indexOf("onboarding") !== -1 )
+{
+
+        var $row = $('<li>', {id:"recommender",class:"list-group-item", style:"background-color:white;"});
+        $row.text("Sure, please answer the following questions:");
+        
+
+        var $form = $('<div>', {id:"recommender_form"});
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"First Name" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"text",id:"first_name",name:"first_name",placeholder:"First Name"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"last name?" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"text",id:"last_name",name:"last_name",placeholder:"last name"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"Date Of Hire" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"date",id:"date_of_hire",name:"date_of_hire",placeholder:"Date Of Hire"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"Phone" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"number",id:"phone",name:"phone",placeholder:"phone"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"mail?" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"e-mail",id:"mail",name:"mail",placeholder:"mail"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"address?" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"text",id:"address",name:"address",placeholder:"address"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"department?" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"text",id:"department",name:"department",placeholder:"department"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('NextFormEmployee1')" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+$row.append($form)
+$chatlog.append($row);
+
+}
+    else{
+
+                if(text== "NextFormEmployee1" )
+{
+
+
+        var $row = $('<li>', {id:"form_employee",class:"list-group-item", style:"background-color:white;"});
+        $row.text("Sure, please answer the following questions:");
+
+        
+
+        var $form = $('<div>', {id:"form_employee_a"});
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"Employ Role" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"text",id:"employ_role",name:"employ_role",placeholder:"employrole"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+
+     
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"emplo goals?" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"text",id:"Employ_goals",name:"Employ_goals",placeholder:"Employ goals"})
+
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+        var $input_income = $("<div>", 
+         {class:"col-md-6 input_div form-group font-weight-bold",style:"",text:"appropreat project" ,style:"margin-top:24px;font-weight:500!important "})
+  
+
+         var $input_income_i = $("<input>", 
+         {class:"form-control input_input",type:"text",id:"appropriate_project",name:"appropriate_project",placeholder:"appropriate project"})
+$input_income.append($input_income_i);
+$form.append($input_income);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeender2');" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+$row.append($form)
+$chatlog.append($row);
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeender2" )
+{
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        $row.text("Sure, please answer the following questions:");
+
+
+        var $form = $('<div>', {id:"button_form"});
+     
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"kitchen", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Reception", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+     
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Bathroom", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+     
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Workspace", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+     
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Support Desk", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+     
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"HR Area", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Fire Exits", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+     
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Eartquake Gathering", onclick:"recommender_offer();" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; "})
+  
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeender003');" }
+            )
+$input_button.append($input_button_i);
+$form.append($input_button);
+
+$row.append($form);
+$chatlog.append($row);
+
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeender003" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+        var $form= $('<div>',{})
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Here are your roles and goals, as described by your supervisor:"})
+
+$form.append($input_button);
+
+     
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Employee Role"})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Employee Goals"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Appropriate Projects"})
+$form.append($input_button);
+
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeen004');" }
+            )
+$form.append($input_button_i);
+
+
+$row.append($form);
+$chatlog.append($row);
+
+
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeen004" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+        var $form= $('<div>',{})
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Following are the necessary tools and accesses you will need:"})
+$form.append($input_button);
+     
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Wifi Password"})
+$form.append($input_button);
+
+
+        
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Email list Of Co-Workers"})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"department Ectension"})
+$form.append($input_button);
+
+           
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeen0055');" }
+            )
+$input_button.append($input_button_i);
+
+$row.append($form);
+$chatlog.append($row);
+
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeen0055" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Following will be your accounts:"})
+$form.append($input_button);
+
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Company Email: FirstName.LastName@thefinansol.com"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Company Phone Line: 2710"})
+$form.append($input_button);
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeen6655');" }
+            )
+$form.append($input_button_i);
+$row.append($form);
+$chatlog.append($row);
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeen6655" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});
+          
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Download Benefits Package"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Download Detailed Job Description"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Download Employee Hand-Book "})
+$form.append($input_button);
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeen7777');" }
+            )
+$form.append($input_button_i);
+$row.append($form);
+$chatlog.append($row);
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeen7777" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Let me introduce you to your team members:  [Send a Hi?]"})
+
+
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text: "Colleague 1 "})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Name"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"email"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"extension"})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"focus Area"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Role"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"years With Us"})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Job title"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text: "Colleague 2 "})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Name"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"email"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"extension"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"focus Area"})
+$form.append($input_button);
+
+
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Role"})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"years With Us"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Job title"})
+$form.append($input_button);
+
+
+                 var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text: "Colleague 3 "})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Name"})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"email"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"extension"})
+$form.append($input_button);
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"focus Area"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Role"})
+$form.append($input_button);
+
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"years With Us"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Job title"})
+$form.append($input_button);
+
+
+         var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text: " Superior 1 "})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Name"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Email"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"extension"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"focus Area"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Role"})
+$form.append($input_button);
+          
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"years With Us"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Job title"})
+$form.append($input_button);
+
+ 
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text: "Superior 2 "})
+$form.append($input_button);
+          
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Name"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"email"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"extension"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"focus Area"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Role"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"years With Us"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Job title"})
+$form.append($input_button);
+
+         var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text: "Subordinate 1"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Name"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"email"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"extension"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"focus Area"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Role"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"years With Us"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Job title"})
+$form.append($input_button);
+
+
+         var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text: "mentor"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Name"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"email"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"extension"})
+$form.append($input_button);
+
+
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"focus Area"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Role"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"years With Us"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Job title"})
+$form.append($input_button);
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeen88888');" }
+            )
+$form.append($input_button_i);
+
+$row.append($form);
+$chatlog.append($row);
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeen88888" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});          
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Click here to Download Introductory Learning Material "})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Or"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"You can click here to be added to the Learning Management System, I’ve already assigned the reading material [Automated Answer: Integration to system required]"})
+$form.append($input_button);
+
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployeen0909');" }
+            )
+$form.append($input_button_i);
+
+$row.append($form);
+$chatlog.append($row);
+
+}
+    else{
+
+                if(text== "ToTheButNextFormEmployeen0909")
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});          
+          
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"We as a company expect the following from you:"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"knowledge"})
+$form.append($input_button);
+
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Skills"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Attitude: Behave with clients, colleagues, supervisors"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Responsibilities: Organizational values"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Performance: First Month, First Quarter, First 6 Months"})
+$form.append($input_button);
+          
+          var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Goods and Services that the job should produce"})
+$form.append($input_button);
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('ToTheButNextFormEmployee999')" }
+            )
+
+$form.append($input_button_i);
+
+$row.append($form);
+$chatlog.append($row);
+
+
+}
+else
+{             
+
+
+          if(text.indexOf("ToTheButNextFormEmployee999") !== -1 )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});        
+
+        var $form = $('<div>', {id:"recommender_form"});          
+          
+          
+          var $form1 = $("<ul>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Company Culture:"})
+$form.append($form1);
+          
+          var $input_button = $("<li>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"When s/he must arrive at the office"})
+$form1.append($input_button);
+          
+var $input_button = $("<li>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Where s/he must park"})
+$form1.append($input_button);
+          var $input_button = $("<li>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"How s/he will access the building"})
+$form1.append($input_button);
+          var $input_button = $("<li>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"What your company’s dress code is"})
+$form1.append($input_button);
+          var $input_button = $("<li>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Organizational Hierarchy"})
+
+$form1.append($input_button);
+
+var $input_button = $("<li>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Communication Policy"})
+$form1.append($input_button);
+$form.append($form1);
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Next", onclick:"createRow('OnBoard1111');"}
+         )
+
+$form.append($input_button_i);
+
+$row.append($form);
+$chatlog.append($row);
+
+
+}
+else
+{             
+
+
+          if(text== "OnBoard1111" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});          
+          
+
+
+	var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Maybe it’s a good idea to go out on a lunch with your mentor, click below button to send a text to your mentor “"})
+
+
+
+$form.append($input_button);
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Send Message", onclick:"createRow('OnBoard2222');"}
+            )
+
+$form.append($input_button_i);
+
+$row.append($form);
+$chatlog.append($row);
+
+
+}
+else
+{             
+
+
+          if(text== "OnBoard2222" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});          
+          
+
+	var $input_button = $("<textarea>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         placeholder:"Enter your Text here..."})
+
+
+
+$form.append($input_button);
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Submit!"}
+            )
+
+$form.append($input_button_i);
+
+$row.append($form);
+$chatlog.append($row);
+
+
+
+
+}
+else
+{             
+
+
+  
+
+        if(text== "OnBoard2222" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});          
+
+
+
+
+
+
+
+var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Surely, here’s a list of assigned relevant courses:"})
+$form.append($input_button);var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Compliance"})
+$form.append($input_button);var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Organizational Culture"})
+$form.append($input_button);var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Communication: Client, Employee, PR"})
+$form.append($input_button);var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Best Practices"})
+$form.append($input_button);var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"Hi <ramesh>! A survey is floated by the management. Kindly fill it whenever"}) 
+$form.append($input_button);var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"you’ve time. Estimated time: 3mins "}) 
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Start", onclick:"recommender_offer();" }
+            )
+
+$form.append($input_button_i);
+
+
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"Remind Me Later", onclick:"createRow('OnBoard33333')" }
+            )
+
+$form.append($input_button_i);
+
+
+}
+else
+{             
+
+
+          if(text== "OnBoard33333" )
+{
+
+
+
+        var $row = $('<li>', {id:"recommender_button",class:"list-group-item", style:"background-color:white;"});
+        
+
+        var $form = $('<div>', {id:"recommender_form"});          
+
+
+
+	var $input_button = $("<div>", 
+         {class:"col-md-6 form-group font-weight-bold",style:"margin-top:24px;font-weight:500!important font-weight-bold; ",
+         text:"When should I remind you?"}) 
+
+
+          var $input_button_i = $("<button>", 
+         {class:"btn btn-primary my_button",id:"recommender_button", name:"recommender_button",text:"In An Hour", onclick:"CreateRow('Okay')" }
+            )
+
+$form.append($input_button_i);
+
+
+$row.append($form);
+$chatlog.append($row);
+
+}
+
+    else{
+                  if(text.indexOf("mapcase") !== -1 || text.indexOf("mapCase") !== -1 || text.indexOf("garagecase") !== -1 || text.indexOf("garageCase") !== -1 )
+        { if(text.indexOf("garageCase") !== -1 || text.indexOf("garagecase") !== -1)
+        {
+        var $mapCase = $('<li>',          { para:"branch",id:"mapCase",class:"list-group-item", style:"height: 314px;width: 508px;max-width: none;background-color: transparent;border-width: 0px;padding: 0px;"});
+} 
+else{
+        {
+        var $mapCase = $('<li>',          { para:"garage",id:"mapCase",class:"list-group-item", style:"height: 314px;width: 508px;max-width: none;background-color: transparent;border-width: 0px;padding: 0px;"});
+}
+        var $row1 = $('<div>',
+                { id:"floating-panel"  , text:"Mode of Travel:",   })
+    $row.append($mapCase)    
+    $mapCase.append($row1)
+        var $row2 = $('<select>',
+                { id:"mode"});
+        
+
+    $row1.append($row2)
+    
+        var $row3 = $('<option>',
+                {value:"DRIVING", text:"Driving"});
+        
+     
+    $row2.append($row3)
+    
+        var $row4 = $('<option>',
+                { value:"WALKING",text:"Walking"});
+            
+    $row2.append($row4)
+        var $row5 = $('<option>',
+                { value:"BICYCLING",text:"Bicycling"});        
+    
+    $row2.append($row5)
+        var $row6 = $('<option>',
+                { value:"TRANSIT",text:"Transit"});
+    $row2.append($row6)
+
+        var $row = $('<div>', { id:"map", style:"position: relative;overflow: hidden;border-width: 1px;border-radius: 1rem;"});
+
+        $mapCase.append($row);
+        $chatlog.append($mapCase);
+
+          var form = $("<script>", 
+         { src:"https://maps.googleapis.com/maps/api/js?key=AIzaSyB5dImhmK-fbMwnIMRmLWer9N_P2U7YfLs&libraries=visualization&callback=initMap",}
+            )
+      $row = form;
+        $chatlog.append($row);
+      }
+    }
+
+        else{
+              $row.text(text);
+              $chatlog.append(str);
+              $chatlog.append($row);
+            }
+} 
+}
+}}}}}}}}}}}}}
+}
+}
+} 
+}
+}
+
+
+      function submitInput(inputData) {
+
+      var chatterbotUrl = "{% url 'chatterbot:chatterbot' %}";
+      var csrftoken = Cookies.get('csrftoken');
+
+      function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain){
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+
+
+        // Display the user's input on the web page
+        userRow(inputData);
+
+        var inputDataObj = {
+          'text': inputData
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/clear_all",
+          data: JSON.stringify(inputDataObj),
+          contentType: 'application/json'
+        });
+
+        var $submit = $.ajax({
+          type: 'POST',
+          url: chatterbotUrl,
+          data: JSON.stringify(inputDataObj),
+         contentType: 'application/json'
+        });
+
+        console.log("inputDataObjText", inputDataObj.text)
+
+        $submit.done(function(statement) {
+
+            createRow(statement.text);
+            console.log("statement.text: "+statement.text)
+            // Clear the input field
+            $input.val('');
+      $('.disbutton').attr('disabled',true);
+
+            // Scroll to the bottom of the chat interface
+            $chatlog[0].scrollTop = $chatlog[0].scrollHeight;
+        });
+
+        $submit.fail(function() {
+          console.log("submit.fail")
+        });
+      }
+
+      $sayButton.click(function() {
+
+        var inputData = {
+          'text': $input.val()
+        }
+        console.log("sayButton.click", inputData.text);
+        submitInput(inputData.text);
+      });
+
+      $input.keydown(function(event) {
+        // Submit the input when the enter button is pressed
+        if (event.keyCode == 13) {
+
+        var inputData = {
+          'text': $input.val()
+        }
+
+          submitInput(inputData.text);
+        console.log("keydown", inputData.text) }
+      });
+
+    </script>
+
+
+
+<script type="text/javascript">
+  
+function Feedback() {
+ 
+
+
+        var inputDataObj = {
+          'relation': document.getElementById("feedback_mail").value,
+          'nominee_name': document.getElementById("feedback_text").value,
+          'you': document.getElementById("feedback_name").value,
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/feedback/",
+          data: {"data": JSON.stringify(inputDataObj)},
+          contentType: 'application/json'
+        });
+
+        $submit.done(function(statement) {
+
+            // Clear the input field
+            $input.val('');
+
+            createRow("Thanks for giving us feedback, It was a nice experience  to talk you!");
+            // Scroll to the bottom of the chat interface
+        });
+
+
+
+}
+
+function recommender_offer() {
+ 
+        var $submit = $.ajax({
+          type: 'GET',
+          });
+
+        $submit.done(function(statement) {
+
+            // Clear the input field
+            $input.val('');
+            createRow("showing_offer");
+            // Scroll to the bottom of the chat interface
+        });
+
+
+
+}
+
+function submit_detail() {
+ 
+        var $submit = $.ajax({
+          type: 'GET',
+          });
+
+        $submit.done(function(statement) {
+
+            // Clear the input field
+            $input.val('');
+            createRow("Excellent! You have a CIBIL Score of 777! Please provide the following documents for verification and moving forward.");
+            // Scroll to the bottom of the chat interface
+        });
+
+
+
+}
+
+
+function permission() {
+ 
+        var $submit = $.ajax({
+          type: 'GET',
+          });
+
+        $submit.done(function(statement) {
+
+            // Clear the input field
+            $input.val('');
+            createRow("Please Fill out this form for Credit Card");
+            // Scroll to the bottom of the chat interface
+        });
+
+
+
+}
+  
+function FileClaim() {
+ 
+
+
+        var inputDataObj = {
+          'you': document.getElementById("policy_number").value,
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/file_claim/",
+          data: {"data": JSON.stringify(inputDataObj)},
+          contentType: 'application/json'
+        });
+
+        $submit.done(function(statement) {
+
+            // Clear the input field
+            $input.val('');
+            createRow(statement.u_name + ", your 2 wheeler "+ statement.u_bike  +" is insured with us, what claim would you like to file?");
+            createRow("FileClaimForm");
+            // Scroll to the bottom of the chat interface
+        });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+function Nominee() {
+ 
+
+
+        var inputDataObj = {
+          'relation': document.getElementById("relation").value,
+          'nominee_name': document.getElementById("nominee_name").value,
+          'you': document.getElementById("policy_number_nominee").value,
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/nominee/",
+          data: {"data": JSON.stringify(inputDataObj)},
+          contentType: 'application/json'
+        });
+
+        $submit.done(function(statement) {
+
+            // Clear the input field
+            $input.val('');
+            if (statement.name == "NotFound"){
+              createRow("The given Policy Number is not Found")
+            }else{
+                        createRow("Your nominee details has been changed");
+                      }
+            // Scroll to the bottom of the chat interface
+        });
+
+
+
+}
+
+
+  
+function Address() {
+ 
+
+
+        var inputDataObj = {
+          'relation': document.getElementById("address").value,
+          'nominee_name': document.getElementById("number_user").value,
+          'you': document.getElementById("policy_number_contact").value,
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/address/",
+          data: {"data": JSON.stringify(inputDataObj)},
+          contentType: 'application/json'
+        });
+
+        $submit.done(function(statement) {
+
+            // Clear the input field
+            $input.val('');
+            if (statement.name == "NotFound"){
+              createRow("The given Policy Number is not Found")
+            }else{
+            createRow("Your address has been changed");
+          }
+            // Scroll to the bottom of the chat interface
+        });
+
+
+
+}
+
+</script>
+
+
+
+<script>
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+      b.setAttribute("onclick", "exprice_of_"+this.name+"('"+arr[i]+"');");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'"+ "onclick=exprice_of_"+this.name+"('"+arr[i]+"');"+">";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+
+
+/*An array containing all the country names in the world:*/
+var makes = [ {% for make in makes %} "{{ make.name1 }}" {% endfor %} ];
+
+var models = [ {% for make in makes %} "{{ make.model }}" {% endfor %} ];
+
+var rtos = [ {% for make in rtos %} "{{ make.loct }}" {% endfor %} ];
+
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+
+
+function make_suggestions(){
+
+
+var make_input = document.getElementById("make");
+
+        var inputDataObj = {
+          'text': inputData
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/makes",
+          data: JSON.stringify(inputDataObj),
+          contentType: 'application/json'
+        });
+
+        $submit.done(function(statement) {
+
+            console.log("makes: "+statement.makes)
+            // Clear the input field
+            $input.val('');
+            
+            autocomplete(make_input, statement.makes);
+
+            // Scroll to the bottom of the chat interface
+        });
+
+}
+
+
+function model_suggestions(){
+
+var model_input = document.getElementById("model");
+
+        var inputDataObj = {
+          'text': inputData
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/models",
+          data: JSON.stringify(inputDataObj),
+          contentType: 'application/json'
+        });
+
+        $submit.done(function(statement) {
+
+            console.log("models: "+statement.models)
+            // Clear the input field
+            $input.val('');
+            
+            autocomplete(model_input, statement.models);
+
+            // Scroll to the bottom of the chat interface
+        });
+
+
+}
+function rto_suggestions(){
+
+
+        var inputDataObj = {
+          'text': inputData
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/rtos",
+          data: JSON.stringify(inputDataObj),
+          contentType: 'application/json'
+        });
+
+        $submit.done(function(statement) {
+
+            console.log("rtos: "+statement.rtos)
+            // Clear the input field
+            
+var model_input = document.getElementById("location");
+            autocomplete(model_input, statement.rtos);
+
+            // Scroll to the bottom of the chat interface
+        });
+
+
+}
+
+function exprice_of_model(value) {
+ 
+        var inputDataObj = {
+          'make': value
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/exprice_of/",
+          data: {data: JSON.stringify(inputDataObj)},
+          contentType: 'application/json'
+        });
+
+
+        $submit.done(function(statement) {
+
+            
+             model_input = document.getElementById("model");
+             model_input.value = statement.model;
+             model_input = document.getElementById("make");
+             model_input.value = statement.make;
+             model_input = document.getElementById("modelc");
+             model_input.value = statement.makec;
+             model_input = document.getElementById("makec");
+             model_input.value = statement.modelc;
+             model_input = document.getElementById("price");
+            model_input.value = statement.exprice;
+
+          var model_input = document.getElementById("reg_date");
+
+
+          d = new Date().toLocaleDateString('en-GB', {  
+  day : 'numeric',
+  month : 'numeric',
+  year : 'numeric'
+});
+document.getElementById("new_date").value = d;
+          
+
+
+
+        });
+
+};
+
+function exprice_of_make(value) {
+ 
+ 
+console.log(value);
+
+
+};
+
+
+
+
+
+function exprice_of_location(value) {
+ 
+ 
+        var inputDataObj = {
+          'make': value
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/loct_code_of/",
+          data: {data: JSON.stringify(inputDataObj)},
+          contentType: 'application/json'
+        });
+
+
+        $submit.done(function(statement) {
+
+            
+            var model_input = document.getElementById("rto_code");
+            model_input.value = statement.loct_code;
+            var model_input1 = document.getElementById("rto_state_code");
+            model_input1.value = statement.state_code;
+            var model_input2 = document.getElementById("rto_city_code");
+            model_input2.value = statement.city_code;
+            console.log(statement.city_code);
+
+            
+          
+
+        });
+
+
+
+};
+
+
+
+
+</script>
+
+  </body>
+</html>

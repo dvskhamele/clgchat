@@ -1,0 +1,278 @@
+{% load staticfiles %}
+{% load static %}
+
+<!doctype html>
+<html> 
+<head>
+	<Title>Chatbot for Enquiry</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+	<link rel="stylesheet" type="text/css" href="/style.css">	
+</head>
+<body     style= "background:#ad1add87;;">
+   
+     <div class="chatbox" id="chatbox">
+
+        <div class="chatlogs js-chat-log" >
+
+        	<div class="chat friend" id="chat_flow">
+        		<div class="user-photo"></div>
+                <p class="chat-message">How can I help you? </p>
+          </div> 
+
+        </div>
+          
+
+          
+           <div class="chat-form">
+           	 	
+           			   <input type="text"  class="js-text" name="user_input" placeholder="Start Typing..."  id="user_input" 
+   							 style="width: -webkit-fill-available;
+   							 border-radius: 8px;
+						    	border-color: whitesmoke;
+						    	   /* border-left: hidden; */
+						    		/* border: hidden; */
+						    	border:1px solid blue;">
+						  </input>
+						  <button id="Button" type="submit" onclick="type_submitted();">send</button>
+           	
+           	</div>
+        
+        </div>
+         
+
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/js.cookie.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script type="text/javascript">
+
+       var chatterbotUrl = "{% url 'chatterbot:chatterbot' %}";
+     var csrftoken = Cookies.get('csrftoken');
+      function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+
+
+      var $chatlog = $('.js-chat-log');
+      var $input = $('.js-text');
+      var $sayButton = $('.js-say');
+
+      function user_row(text) {
+
+          var $row =$('<div>',{ class:"chat self"});
+          var $row2 =$('<div>',{class:"user-photo"});
+
+          var $row3 =$("<img>",{src:"http://www.esek.org.gr/images/ESET/eset_user.png"});
+$row2.append($row3)
+$row.append($row2)
+
+          var $row4 =$('<p>',{class:"chat-message"});
+          $row4.text(text)
+
+$row.append($row4)
+$chatlog.append($row)
+        }
+
+      function createRow(text) {
+        var $row = $('<div>',{ class:"chat friend"});
+       
+          var $row2 =$('<div>',{ class:"user-photo"});
+          var $row3 =$("<img>",{src:"https://img.icons8.com/metro/1600/university.png"});
+$row2.append($row3)
+$row.append($row2)
+          var $row4 =$('<p>',{class:"chat-message"});
+           $row4.text(text);
+
+$row.append($row4)
+$chatlog.append($row)
+
+
+      }
+
+      function submitInput(inputData) {
+        // Display the user's input on the web page
+        var inputDataObj = {
+          'text': inputData
+        }
+        user_row(inputData);
+        var $submit = $.ajax({
+          type: 'POST',
+          url: chatterbotUrl,
+          data: JSON.stringify(inputDataObj),
+          contentType: 'application/json'
+        });
+      
+    
+   
+       $submit.done(function(statement) {
+
+            createRow(statement.text);
+            console.log("statement.text: "+statement.text)
+            // Clear the input field
+            $input.val('');
+
+            // Scroll to the bottom of the chat interface
+          $chatlog[0].scrollTop = $chatlog[0].scrollHeight;
+        });
+
+   
+
+        $submit.fail(function() {
+  submitInput("Sorry, we are currently out of service. Please try again later.");
+        });
+      }
+      $sayButton.click(function() {
+  var Input=document.getElementById("user_input");
+    UserInput= Input.value;
+  submitInput(UserInput);
+      });
+      $input.keydown(function(event) {
+        // Submit the input when the enter button is pressed
+        if (event.keyCode == 13) {
+  var Input=document.getElementById("user_input");
+    UserInput= Input.value;
+  submitInput(UserInput);
+        }
+      });
+/*
+      function submitInput(UserInput) {
+
+      var chatterbotUrl = "{% url 'chatterbot:chatterbot' %}";
+      var csrftoken = Cookies.get('csrftoken');
+ 
+       var $input = $('.js-text');
+      
+      function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain){
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+
+
+        // Display the user's input on the web page
+        userRow(UserInput);
+
+     
+        var UserInputObj = {
+          'text': UserInput
+        }
+
+        var $submit = $.ajax({
+          type: 'GET',
+          url: "/clear_all",
+          data: JSON.stringify(UserInputObj),
+          contentType: 'application/json'
+        });
+
+        var $submit = $.ajax({
+          type: 'POST',
+          url: chatterbotUrl,
+          data: JSON.stringify(UserInputObj),
+         contentType: 'application/json'
+        });
+
+        console.log("UserInputObjText", UserInputObj.text)
+
+        $submit.done(function(statement) {
+
+            chatbot_row(statement.text);
+            console.log("statement.text: "+statement.text)
+            // Clear the input field
+            $input.val('');
+      $('.disbutton').attr('disabled',true);
+
+            // Scroll to the bottom of the chat interface
+            $chatlog[0].scrollTop = $chatlog[0].scrollHeight;
+        });
+
+        $submit.fail(function() {
+          console.log("submit.fail")
+        });
+      }
+*/
+      
+function type_submitted(){
+	var Input=document.getElementById("user_input");
+		UserInput= Input.value;
+	submitInput(UserInput);
+   
+}
+
+function type_input(){
+   Input=document.getElementById("user_input");
+   value_user=Input.value;
+   submitInput(value_user);
+}
+
+/*
+function user_row(UserInput){
+  
+        if (UserInput != ""){
+
+  var chatlogs=$(".chatlogs");
+
+          var $row =$('<div>',{ class:"chat self"});
+
+          var $row2 =$('<div>',{ class:"user-photo"});
+          var $row3 =$('<img>',{ src:"img/user.png"});
+
+$row2.append($row3)
+$row.append($row2)
+
+          var $row4 =$('<p>',{class:"chat-message"});
+          $row4.append(UserInput)
+$row.append($row4)
+chatlogs.append($row)
+}
+        }
+function type_input(){
+   Input=document.getElementById("user_input");
+   value_user=Input.value;
+   user_row.append("value_user")
+}
+
+
+function chatbot_row(statement){
+  
+  var chatlogs=$(".chatlogs");
+
+          var $row =$('<div>',{ class:"chat friend"});
+
+          var $row2 =$('<div>',{ class:"user-photo"});
+          var $row3 =$('<img>',{ src:"img/2img.png"});
+
+$row2.append($row3)
+$row.append($row2)
+
+          var $row4 =$('<p>',{class:"chat-message"});
+$row.append($row4)
+chatlogs.append($row)
+
+        }
+*/
+</script>
+
+  </body>
+ </html>       
